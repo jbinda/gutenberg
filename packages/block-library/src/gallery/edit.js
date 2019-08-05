@@ -19,7 +19,7 @@ import {
 } from '@wordpress/components';
 import {
 	BlockControls,
-	BlockIcon,
+	// BlockIcon,
 	MediaPlaceholder,
 	MediaUpload,
 	InspectorControls,
@@ -35,6 +35,8 @@ import { withSelect } from '@wordpress/data';
 import GalleryImage from './gallery-image';
 import icon from './icon';
 import { defaultColumnsNumber, pickRelevantMediaFiles } from './shared';
+
+import {List,Span} from '@wordpress/aprimitives';
 
 const MAX_COLUMNS = 8;
 const linkOptions = [
@@ -237,7 +239,8 @@ class GalleryEdit extends Component {
 				isAppender={ hasImages }
 				className={ className }
 				dropZoneUIOnly={ hasImages && ! isSelected }
-				icon={ ! hasImages && <BlockIcon icon={ icon } /> }
+				// TODO add native icon definition to handle SVG icons
+				icon={ ! hasImages && <Span>Icon</Span> } //<BlockIcon icon={ icon } /> }
 				labels={ {
 					title: ! hasImages && __( 'Gallery' ),
 					instructions: ! hasImages && __( 'Drag images, upload new ones or select files from your library.' ),
@@ -289,7 +292,8 @@ class GalleryEdit extends Component {
 					</PanelBody>
 				</InspectorControls>
 				{ noticeUI }
-				<ul
+
+				 <List
 					className={ classnames(
 						className,
 						{
@@ -298,46 +302,45 @@ class GalleryEdit extends Component {
 							'is-cropped': imageCrop,
 						}
 					) }
-				>
-					{ images.map( ( img, index ) => {
-						/* translators: %1$d is the order number of the image, %2$d is the total number of images. */
+					data= {images}
+					renderItem={({item:img,index})=> 	
+					{
+						console.log(img,index)
 						const ariaLabel = sprintf( __( 'image %1$d of %2$d in gallery' ), ( index + 1 ), images.length );
 
-						return (
-							<li className="blocks-gallery-item" key={ img.id || img.url }>
-								<GalleryImage
-									url={ img.url }
-									alt={ img.alt }
-									id={ img.id }
-									isFirstItem={ index === 0 }
-									isLastItem={ ( index + 1 ) === images.length }
-									isSelected={ isSelected && this.state.selectedImage === index }
-									onMoveBackward={ this.onMoveBackward( index ) }
-									onMoveForward={ this.onMoveForward( index ) }
-									onRemove={ this.onRemoveImage( index ) }
-									onSelect={ this.onSelectImage( index ) }
-									setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
-									caption={ img.caption }
-									aria-label={ ariaLabel }
-								/>
-							</li>
-						);
-					} ) }
-				</ul>
+					return
+					(<GalleryImage
+						url={ img.url }
+						alt={ img.alt }
+						id={ img.id || index}
+						isFirstItem={ index === 0 }
+						isLastItem={ ( index + 1 ) === images.length }
+						isSelected={ isSelected && this.state.selectedImage === index }
+						onMoveBackward={ this.onMoveBackward( index ) }
+						onMoveForward={ this.onMoveForward( index ) }
+						onRemove={ this.onRemoveImage( index ) }
+						onSelect={ this.onSelectImage( index ) }
+						setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
+						caption={ img.caption }
+						aria-label={ ariaLabel }
+					/>)}}
+					/> 
 				{ mediaPlaceholder }
 			</>
 		);
 	}
 }
+// export default GalleryEdit
 export default compose( [
 	withSelect( ( select ) => {
 		const { getSettings } = select( 'core/block-editor' );
-		const {
-			__experimentalMediaUpload,
-		} = getSettings();
+		//TODO investigate on getSettings function
+		// const {
+		// 	__experimentalMediaUpload,
+		// } = getSettings();
 
 		return {
-			mediaUpload: __experimentalMediaUpload,
+			mediaUpload: ()=> {},//__experimentalMediaUpload,
 		};
 	} ),
 	withNotices,

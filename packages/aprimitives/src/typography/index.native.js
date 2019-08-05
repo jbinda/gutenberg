@@ -1,0 +1,8 @@
+export {default as Text} from './text'
+export {default as H1} from './text'
+export {default as H2} from './text'
+export {default as H3} from './text'
+export {default as H4} from './text'
+export {default as H5} from './text'
+export {default as H6} from './text'
+export {default as P} from './text'

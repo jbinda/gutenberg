@@ -14,6 +14,8 @@ import { withSelect } from '@wordpress/data';
 import { RichText } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
 
+import  {Div ,Image} from '@wordpress/aprimitives';
+
 class GalleryImage extends Component {
 	constructor() {
 		super( ...arguments );
@@ -104,7 +106,19 @@ class GalleryImage extends Component {
 			// direct image selection and unfocus caption fields.
 			/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 			<>
-				<img
+			<Image
+				src={ url }
+				alt={ alt }
+				data-id={ id }
+				onClick={ this.onSelectImage }
+				onFocus={ this.onSelectImage }
+				onKeyDown={ this.onRemoveImage }
+				tabIndex="0"
+				aria-label={ ariaLabel }
+				ref={ this.bindContainer }
+			/>
+			{/* TODO  - investigate if image is shown properly */}
+				{/* <img
 					src={ url }
 					alt={ alt }
 					data-id={ id }
@@ -114,7 +128,7 @@ class GalleryImage extends Component {
 					tabIndex="0"
 					aria-label={ ariaLabel }
 					ref={ this.bindContainer }
-				/>
+				/> */}
 				{ isBlobURL( url ) && <Spinner /> }
 			</>
 			/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
@@ -126,9 +140,9 @@ class GalleryImage extends Component {
 		} );
 
 		return (
-			<figure className={ className }>
+			<Div className={ className }>
 				{ href ? <a href={ href }>{ img }</a> : img }
-				<div className="block-library-gallery-item__move-menu">
+				<Div className="block-library-gallery-item__move-menu">
 					<IconButton
 						icon="arrow-left"
 						onClick={ isFirstItem ? undefined : onMoveBackward }
@@ -145,8 +159,8 @@ class GalleryImage extends Component {
 						aria-disabled={ isLastItem }
 						disabled={ ! isSelected }
 					/>
-				</div>
-				<div className="block-library-gallery-item__inline-menu">
+				</Div>
+				<Div className="block-library-gallery-item__inline-menu">
 					<IconButton
 						icon="no-alt"
 						onClick={ onRemove }
@@ -154,7 +168,7 @@ class GalleryImage extends Component {
 						label={ __( 'Remove Image' ) }
 						disabled={ ! isSelected }
 					/>
-				</div>
+				</Div>
 				<RichText
 					tagName="figcaption"
 					placeholder={ isSelected ? __( 'Write caption…' ) : null }
@@ -164,7 +178,7 @@ class GalleryImage extends Component {
 					unstableOnFocus={ this.onSelectCaption }
 					inlineToolbar
 				/>
-			</figure>
+			</Div>
 		);
 	}
 }

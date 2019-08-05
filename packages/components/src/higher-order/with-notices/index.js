@@ -86,15 +86,15 @@ export default createHigherOrderComponent( ( OriginalComponent ) => {
 		render() {
 			return (
 				<OriginalComponent
-					noticeList={ this.state.noticeList }
-					noticeOperations={ this.noticeOperations }
-					noticeUI={
-						this.state.noticeList.length > 0 && <NoticeList
-							className="components-with-notices-ui"
-							notices={ this.state.noticeList }
-							onRemove={ this.removeNotice }
-						/>
-					}
+					// noticeList={ this.state.noticeList }
+					// noticeOperations={ this.noticeOperations }
+					// noticeUI={
+					// 	this.state.noticeList.length > 0 && <NoticeList
+					// 		className="components-with-notices-ui"
+					// 		notices={ this.state.noticeList }
+					// 		onRemove={ this.removeNotice }
+					// 	/>
+					// }
 					{ ...this.props }
 				/>
 			);
