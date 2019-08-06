@@ -227,30 +227,34 @@ export class BlockList extends Component {
 	}
 
 	renderItem( { item: clientId, index } ) {
+		const { getBlock, isBlockSelected, isPostTitleSelected, rootClientId } = this.props;
+		const { blockTypePickerVisible } = this.state;
 
-		const itemBlock = this.props.getBlock(clientId);
-		const isBlockReplaceable = this.isReplaceable(itemBlock);
+		var addBlockSeparatorPosition;
+		if ( blockTypePickerVisible && isPostTitleSelected && index == 0 ) {
+			addBlockSeparatorPosition = 'top';
+		}  else if ( blockTypePickerVisible && isBlockSelected( clientId ) ) {
+			addBlockSeparatorPosition = 'bottom'
+		} else {
+			addBlockSeparatorPosition = 'gone'
+		}
 
-		const shouldShowAddBlockSeparator = this.state.blockTypePickerVisible && 
-		            ( this.props.isBlockSelected( clientId ) || ( index === 0 && this.props.isPostTitleSelected ) );
-		const shouldShowItemBlock = ! ( shouldShowAddBlockSeparator && isBlockReplaceable );
-
-		// If post title is selected, new blocks are inserted at beginning of post, so indicator should go at top
-		const shouldPositionAddBlockSeparatorOnTop = this.props.isPostTitleSelected;
+		const itemBlock = getBlock( clientId );
+		const shouldShowItemBlock = addBlockSeparatorPosition === 'gone' || ! this.isReplaceable( itemBlock );
 
 		return (
-			<ReadableContentView reversed={ shouldPositionAddBlockSeparatorOnTop }>
+			<ReadableContentView reversed={ addBlockSeparatorPosition === 'top' }>
 				{ shouldShowItemBlock && 
 					(<BlockListBlock
 						key={ clientId }
 						showTitle={ false }
 						clientId={ clientId }
-						rootClientId={ this.props.rootClientId }
+						rootClientId={ rootClientId }
 						onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
 						borderStyle={ this.blockHolderBorderStyle() }
 						focusedBorderColor={ styles.blockHolderFocused.borderColor }
 					/>) }
-				{ shouldShowAddBlockSeparator && this.renderAddBlockSeparator() }
+				{ addBlockSeparatorPosition !== 'gone' && this.renderAddBlockSeparator() }
 			</ReadableContentView>
 		);
 	}
