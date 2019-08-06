@@ -1,3 +1,9 @@
+## Master
+
+### New Features
+
+- The bundled `eslint` dependency has been updated from requiring `^5.16.0` to requiring `^6.1.0`.
+
 ## 3.4.0 (2019-08-05)
 
 ### New Features
@@ -19,7 +25,7 @@
 
 ## 3.2.0 (2019-05-21)
 
-### New Feature
+### New Features
 
 - Leverage `@wordpress/dependency-extraction-webpack-plugin` plugin to extract WordPress
   dependencies.
