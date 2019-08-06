@@ -227,25 +227,17 @@ export class BlockList extends Component {
 	}
 
 	renderItem( { item: clientId, index } ) {
-		const { getBlock, isBlockSelected, isPostTitleSelected, rootClientId } = this.props;
-		const { blockTypePickerVisible } = this.state;
+		const { getBlock, rootClientId } = this.props;
 
-		var addBlockSeparatorPosition;
-		if ( blockTypePickerVisible && isPostTitleSelected && index == 0 ) {
-			addBlockSeparatorPosition = 'top';
-		}  else if ( blockTypePickerVisible && isBlockSelected( clientId ) ) {
-			addBlockSeparatorPosition = 'bottom'
-		} else {
-			addBlockSeparatorPosition = 'gone'
-		}
-
+		const addBlockSeparatorPosition = this.getAddBlockSeparatorPosition( clientId, index );
 		const itemBlock = getBlock( clientId );
 		const shouldShowItemBlock = addBlockSeparatorPosition === 'gone' || ! this.isReplaceable( itemBlock );
 
 		return (
-			<ReadableContentView reversed={ addBlockSeparatorPosition === 'top' }>
-				{ shouldShowItemBlock && 
-					(<BlockListBlock
+			<ReadableContentView>
+				{ addBlockSeparatorPosition === 'top' && this.renderAddBlockSeparator() }
+				{ shouldShowItemBlock &&
+					( <BlockListBlock
 						key={ clientId }
 						showTitle={ false }
 						clientId={ clientId }
@@ -253,10 +245,22 @@ export class BlockList extends Component {
 						onCaretVerticalPositionChange={ this.onCaretVerticalPositionChange }
 						borderStyle={ this.blockHolderBorderStyle() }
 						focusedBorderColor={ styles.blockHolderFocused.borderColor }
-					/>) }
-				{ addBlockSeparatorPosition !== 'gone' && this.renderAddBlockSeparator() }
+					/> ) }
+				{ addBlockSeparatorPosition === 'bottom' && this.renderAddBlockSeparator() }
 			</ReadableContentView>
 		);
+	}
+
+	getAddBlockSeparatorPosition( clientId, index ) {
+		const { isBlockSelected, isPostTitleSelected } = this.props;
+		const { blockTypePickerVisible } = this.state;
+
+		if ( blockTypePickerVisible && isPostTitleSelected && index === 0 ) {
+			return 'top';
+		} else if ( blockTypePickerVisible && isBlockSelected( clientId ) ) {
+			return 'bottom';
+		}
+		return 'gone';
 	}
 
 	renderAddBlockSeparator() {
