@@ -16,6 +16,8 @@ import {
 	ToggleControl,
 	Toolbar,
 	withNotices,
+	List,
+	Span,
 } from '@wordpress/components';
 import {
 	BlockControls,
@@ -35,8 +37,6 @@ import { withSelect } from '@wordpress/data';
 import GalleryImage from './gallery-image';
 import icon from './icon';
 import { defaultColumnsNumber, pickRelevantMediaFiles } from './shared';
-
-import {List,Span} from '@wordpress/aprimitives';
 
 const MAX_COLUMNS = 8;
 const linkOptions = [
@@ -255,21 +255,21 @@ class GalleryEdit extends Component {
 			/>
 		);
 
-		if ( ! hasImages ) {
-			return (
-				<>
-					{ controls }
-					{ mediaPlaceholder }
-				</>
-			);
-		}
+		// if ( ! hasImages ) {
+		// 	return (
+		// 		<>
+		// 			{ controls }
+		// 			{ mediaPlaceholder }
+		// 		</>
+		// 	);
+		// }
 
 		return (
 			<>
 				{ controls }
 				<InspectorControls>
-					<PanelBody title={ __( 'Gallery Settings' ) }>
-						{ images.length > 1 && <RangeControl
+					{/* <PanelBody title={ __( 'Gallery Settings' ) }> */}
+						{/* { images.length > 1 && <RangeControl
 							label={ __( 'Columns' ) }
 							value={ columns }
 							onChange={ this.setColumnsNumber }
@@ -288,12 +288,12 @@ class GalleryEdit extends Component {
 							value={ linkTo }
 							onChange={ this.setLinkTo }
 							options={ linkOptions }
-						/>
-					</PanelBody>
+						/> */}
+					{/* </PanelBody> */}
 				</InspectorControls>
 				{ noticeUI }
 
-				 <List
+				 {/* <List
 					className={ classnames(
 						className,
 						{
@@ -324,7 +324,7 @@ class GalleryEdit extends Component {
 						caption={ img.caption }
 						aria-label={ ariaLabel }
 					/>)}}
-					/> 
+					/>  */}
 				{ mediaPlaceholder }
 			</>
 		);

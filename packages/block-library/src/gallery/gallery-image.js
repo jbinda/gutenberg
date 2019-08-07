@@ -7,14 +7,12 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
-import { IconButton, Spinner } from '@wordpress/components';
+import { IconButton, Spinner, Div ,Image } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { BACKSPACE, DELETE } from '@wordpress/keycodes';
 import { withSelect } from '@wordpress/data';
 import { RichText } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
-
-import  {Div ,Image} from '@wordpress/aprimitives';
 
 class GalleryImage extends Component {
 	constructor() {

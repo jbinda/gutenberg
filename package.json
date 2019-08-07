@@ -18,7 +18,6 @@
 		"GUTENBERG_PHASE": 2
 	},
 	"dependencies": {
-		"@wordpress/aprimitives": "file:packages/aprimitives",
 		"@wordpress/a11y": "file:packages/a11y",
 		"@wordpress/annotations": "file:packages/annotations",
 		"@wordpress/api-fetch": "file:packages/api-fetch",
