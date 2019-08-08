@@ -7,7 +7,7 @@ const List = ( { data, className, renderItem, keyExtractor, ...rest } ) => {
 	return (
 		<FlatList
 			data={ data }
-			renderItem={ renderItem }
+			renderItem={ ({item,index}) => renderItem(item,index) }
 			keyExtractor={ keyExtractor }
 			style={ className }
 			{ ...rest }

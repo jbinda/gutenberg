@@ -68,13 +68,13 @@ function MediaPlaceholder( props ) {
 						<View style={ styles.emptyStateContainer }>
 							{ getMediaOptions() }
 							<View style={ styles.modalIcon }>
-								{ icon }
+								{icon && icon.props && icon.props.icon} 
 							</View>
 							<Text style={ styles.emptyStateTitle }>
-								{ placeholderTitle }
+								{ placeholderTitle || 'Gallery' }
 							</Text>
 							<Text style={ styles.emptyStateDescription }>
-								{ instructions }
+								{ instructions || 'ADD GALLERY IMAGE' }
 							</Text>
 						</View>
 					</TouchableWithoutFeedback>

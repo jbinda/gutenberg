@@ -98,7 +98,6 @@ class GalleryImage extends Component {
 				href = link;
 				break;
 		}
-console.log(this.props)
 		const img = (
 			// Disable reason: Image itself is not meant to be interactive, but should
 			// direct image selection and unfocus caption fields.

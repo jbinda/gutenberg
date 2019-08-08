@@ -21,7 +21,7 @@ import {
 } from '@wordpress/components';
 import {
 	BlockControls,
-	// BlockIcon,
+	BlockIcon,
 	MediaPlaceholder,
 	MediaUpload,
 	InspectorControls,
@@ -30,7 +30,6 @@ import { Component } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import { getBlobByURL, isBlobURL, revokeBlobURL } from '@wordpress/blob';
 import { withSelect } from '@wordpress/data';
-
 /**
  * Internal dependencies
  */
@@ -239,13 +238,13 @@ class GalleryEdit extends Component {
 				isAppender={ hasImages }
 				className={ className }
 				dropZoneUIOnly={ hasImages && ! isSelected }
-				// TODO add native icon definition to handle SVG icons
-				icon={ ! hasImages && <Span>Icon</Span> } //<BlockIcon icon={ icon } /> }
+				icon={ ! hasImages && <BlockIcon icon={ icon } /> }
 				labels={ {
 					title: ! hasImages && __( 'Gallery' ),
 					instructions: ! hasImages && __( 'Drag images, upload new ones or select files from your library.' ),
 				} }
 				onSelect={ this.onSelectImages }
+				onFocus={()=>console.warn('onFocusHandler')}
 				accept="image/*"
 				allowedTypes={ ALLOWED_MEDIA_TYPES }
 				multiple
@@ -303,15 +302,15 @@ class GalleryEdit extends Component {
 						}
 					) }
 					data= {images}
-					renderItem={({item:img,index})=> 	
+					renderItem={(item,index)=> 	
 					{
-						console.log(img,index)
+						const img = item
 						const ariaLabel = sprintf( __( 'image %1$d of %2$d in gallery' ), ( index + 1 ), images.length );
 
 					return <GalleryImage
-						url={ img.url }
-						alt={ img.alt }
-						id={ img.id || index}
+						url={ img && img.url }
+						alt={ img && img.alt }
+						id={ img && img.id || index}
 						isFirstItem={ index === 0 }
 						isLastItem={ ( index + 1 ) === images.length }
 						isSelected={ isSelected && this.state.selectedImage === index }
@@ -320,7 +319,7 @@ class GalleryEdit extends Component {
 						onRemove={ this.onRemoveImage( index ) }
 						onSelect={ this.onSelectImage( index ) }
 						setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
-						caption={ img.caption }
+						caption={ img && img.caption }
 						aria-label={ ariaLabel }
 					/>
 				}}

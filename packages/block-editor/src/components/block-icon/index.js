@@ -7,7 +7,7 @@ import { get } from 'lodash';
 /**
  * WordPress dependencies
  */
-import { Path, Icon, SVG } from '@wordpress/components';
+import { Path, Icon, SVG,Span } from '@wordpress/components';
 
 export default function BlockIcon( { icon, showColors = false, className } ) {
 	if ( get( icon, [ 'src' ] ) === 'block-default' ) {
@@ -23,7 +23,7 @@ export default function BlockIcon( { icon, showColors = false, className } ) {
 	} : {};
 
 	return (
-		<span
+		<Span
 			style={ style }
 			className={ classnames(
 				'editor-block-icon block-editor-block-icon',
@@ -32,6 +32,6 @@ export default function BlockIcon( { icon, showColors = false, className } ) {
 			) }
 		>
 			{ renderedIcon }
-		</span>
+		</Span>
 	);
 }

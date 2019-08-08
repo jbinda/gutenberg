@@ -7,12 +7,12 @@ import { View as RNView } from 'react-native';
  */
 import { Text } from '../typography';
 
-const View = ( { children, classname, ...rest } ) => {
+const View = ( { children, className, ...rest } ) => {
 	if ( typeof children === 'string' ) {
 		return <Text { ...rest }>{ children }</Text>;
 	}
 	return (
-		<RNView style={ classname } { ...rest }>
+		<RNView style={ className } { ...rest }>
 			{ children }
 		</RNView>
 	);
