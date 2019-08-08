@@ -7,7 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { Component } from '@wordpress/element';
-import { IconButton, Spinner, Div ,Image } from '@wordpress/components';
+import { IconButton, Spinner, Div ,Image,A } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import { BACKSPACE, DELETE } from '@wordpress/keycodes';
 import { withSelect } from '@wordpress/data';
@@ -98,7 +98,7 @@ class GalleryImage extends Component {
 				href = link;
 				break;
 		}
-
+console.log(this.props)
 		const img = (
 			// Disable reason: Image itself is not meant to be interactive, but should
 			// direct image selection and unfocus caption fields.
@@ -114,19 +114,8 @@ class GalleryImage extends Component {
 				tabIndex="0"
 				aria-label={ ariaLabel }
 				ref={ this.bindContainer }
+				style={{width: 300, height: 300}}
 			/>
-			{/* TODO  - investigate if image is shown properly */}
-				{/* <img
-					src={ url }
-					alt={ alt }
-					data-id={ id }
-					onClick={ this.onSelectImage }
-					onFocus={ this.onSelectImage }
-					onKeyDown={ this.onRemoveImage }
-					tabIndex="0"
-					aria-label={ ariaLabel }
-					ref={ this.bindContainer }
-				/> */}
 				{ isBlobURL( url ) && <Spinner /> }
 			</>
 			/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
@@ -139,7 +128,7 @@ class GalleryImage extends Component {
 
 		return (
 			<Div className={ className }>
-				{ href ? <a href={ href }>{ img }</a> : img }
+				{ href ? <A href={ href }>{ img }</A> : img }
 				<Div className="block-library-gallery-item__move-menu">
 					<IconButton
 						icon="arrow-left"

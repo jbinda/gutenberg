@@ -3,9 +3,9 @@
  */
 import { View as RNView } from 'react-native';
 
-const View = ( { children, classname, ...rest } ) => {
+const View = ( { children, className, ...rest } ) => {
 	return (
-		<RNView style={ classname } { ...rest }>
+		<RNView style={ className } { ...rest }>
 			{ children }
 		</RNView>
 	);

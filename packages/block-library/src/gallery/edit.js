@@ -255,14 +255,14 @@ class GalleryEdit extends Component {
 			/>
 		);
 
-		// if ( ! hasImages ) {
-		// 	return (
-		// 		<>
-		// 			{ controls }
-		// 			{ mediaPlaceholder }
-		// 		</>
-		// 	);
-		// }
+		if ( ! hasImages ) {
+			return (
+				<>
+					{ controls }
+					{ mediaPlaceholder }
+				</>
+			);
+		}
 
 		return (
 			<>
@@ -293,7 +293,7 @@ class GalleryEdit extends Component {
 				</InspectorControls>
 				{ noticeUI }
 
-				 {/* <List
+				 <List
 					className={ classnames(
 						className,
 						{
@@ -308,8 +308,7 @@ class GalleryEdit extends Component {
 						console.log(img,index)
 						const ariaLabel = sprintf( __( 'image %1$d of %2$d in gallery' ), ( index + 1 ), images.length );
 
-					return
-					(<GalleryImage
+					return <GalleryImage
 						url={ img.url }
 						alt={ img.alt }
 						id={ img.id || index}
@@ -323,14 +322,15 @@ class GalleryEdit extends Component {
 						setAttributes={ ( attrs ) => this.setImageAttributes( index, attrs ) }
 						caption={ img.caption }
 						aria-label={ ariaLabel }
-					/>)}}
-					/>  */}
+					/>
+				}}
+					/> 
 				{ mediaPlaceholder }
 			</>
 		);
 	}
 }
-// export default GalleryEdit
+
 export default compose( [
 	withSelect( ( select ) => {
 		const { getSettings } = select( 'core/block-editor' );

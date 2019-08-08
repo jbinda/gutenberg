@@ -3,10 +3,10 @@
  */
 import { Image as ImageRN } from 'react-native';
 
-const Image = ({ src, classname, ...rest } )=> {
+const Image = ({ src, className,style, ...rest } )=> {
    return (
         <ImageRN
-          style={classname}
+          style={[className,style]}
           source={{uri: src}}
           {...rest}
         />

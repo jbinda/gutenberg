@@ -3,13 +3,13 @@
  */
 import { FlatList } from 'react-native';
 
-const List = ( { data, classname, renderItem, keyExtractor, ...rest } ) => {
+const List = ( { data, className, renderItem, keyExtractor, ...rest } ) => {
 	return (
 		<FlatList
 			data={ data }
 			renderItem={ renderItem }
 			keyExtractor={ keyExtractor }
-			style={ classname }
+			style={ className }
 			{ ...rest }
 		/>
 	);
