@@ -1,10 +1,19 @@
 @import './style.scss';
 @import './editor.scss';
 
-.box {
+.image-focus {
 	width: 100px;
 	height: 100px;
 	background-color: yellow;
+}
+
+.image {
+	width: 100%;
+	height: 300;
+}
+
+.is-selected {
+	background-color: red;
 }
 
 .block-library-gallery-item__move-menu,

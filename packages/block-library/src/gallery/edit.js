@@ -84,6 +84,7 @@ class GalleryEdit extends Component {
 
 	onSelectImage( index ) {
 		return () => {
+			this.setImageAttributes(index,{})
 			if ( this.state.selectedImage !== index ) {
 				this.setState( {
 					selectedImage: index,
@@ -262,7 +263,6 @@ class GalleryEdit extends Component {
 				<>
 					{ controls }
 					{ mediaPlaceholder }
-					<Span className="box padded" styles={styles}>span</Span>
 				</>
 			);
 		}
@@ -311,7 +311,6 @@ class GalleryEdit extends Component {
 						const img = item
 						const id = img && img.id || index
 						const ariaLabel = sprintf( __( 'image %1$d of %2$d in gallery' ), ( index + 1 ), images.length );
-
 					return <GalleryImage
 						key={ id }
 						url={ img && img.url }
@@ -319,7 +318,7 @@ class GalleryEdit extends Component {
 						id={ id }
 						isFirstItem={ index === 0 }
 						isLastItem={ ( index + 1 ) === images.length }
-						isSelected={ isSelected && this.state.selectedImage === index }
+						isSelected={ this.state.selectedImage === index }
 						onMoveBackward={ this.onMoveBackward( index ) }
 						onMoveForward={ this.onMoveForward( index ) }
 						onRemove={ this.onRemoveImage( index ) }
@@ -343,7 +342,6 @@ export default compose( [
 		const {
 			__experimentalMediaUpload,
 		} = getSettings();
-		// console.log(getSettings, __experimentalMediaUpload)
 		return {
 			mediaUpload: ()=> {},//__experimentalMediaUpload,
 		};

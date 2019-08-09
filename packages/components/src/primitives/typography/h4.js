@@ -1,4 +1,4 @@
-const Text = ( children, ...rest ) => {
+const Text = ( { children, ...rest } ) => {
 	return <h4 { ...rest }>{ children }</h4>;
 };
 

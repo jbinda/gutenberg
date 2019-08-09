@@ -14,6 +14,9 @@ import { withSelect } from '@wordpress/data';
 import { RichText } from '@wordpress/block-editor';
 import { isBlobURL } from '@wordpress/blob';
 
+const isWeb = window.localStorage
+const styles = isWeb ? {} : require('./index.native.scss')
+
 class GalleryImage extends Component {
 	constructor() {
 		super( ...arguments );
@@ -114,16 +117,15 @@ class GalleryImage extends Component {
 				onKeyDown={ this.onRemoveImage }
 				tabIndex="0"
 				aria-label={ ariaLabel }
-				ref={ this.bindContainer }
-				style={{width: '100%', height: 300, resizeMode: 'cover'}}
+				imgRef={ this.bindContainer }
+				resizeMode= 'cover'
+				styles={styles}
+				className={	isSelected ? 'image-focus' : 'image'}
 			/>
 				{ isBlobURL( url ) && <Spinner /> }
 			</>
 			/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 		);
-
-		const isWeb = window.localStorage
-		const styles = isWeb ? {} : require('./index.native.scss')
 
 		const className = classnames( {
 			'is-selected': isSelected,

@@ -1,15 +1,16 @@
-const Image = (props )=>
+const Image = ({src,alt,id,onClick,onFocus,onKeyDown,tabIndex,ariaLabel,imgRef} )=>
 {
-   return ( <img {...props}	 /> )
-					// src={ url }
-					// alt={ alt }
-					// data-id={ id }
-					// onClick={ this.onSelectImage }
-					// onFocus={ this.onSelectImage }
-					// onKeyDown={ this.onRemoveImage }
-					// tabIndex="0"
-					// aria-label={ ariaLabel }
-					// ref={ this.bindContainer }
+   return ( <img  
+					src={ src }
+					alt={ alt }
+					data-id={ id }
+					onClick={ () => onClick() }
+					onFocus={ () => onFocus() }
+					onKeyDown={ (e) => onKeyDown(e) }
+					tabIndex={tabIndex}
+					aria-label={ ariaLabel }
+					ref={ imgRef }
+					/> )
 }
 
 export default Image 
