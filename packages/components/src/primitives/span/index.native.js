@@ -2,6 +2,7 @@
  * External dependencies
  */
 import { View as RNView } from 'react-native';
+
 /**
  * Internal dependencies
  */
@@ -9,8 +10,7 @@ import { Text } from '../typography';
 import { mergeStyles } from '../utils'
 
 const View = ( { children, className, styles, ...rest } ) => {
-    // const mergedStyles = className.split(" ").map(style => styles[style])
-    const mergedStyles = mergeStyles(className,styles)
+	  const mergedStyles = mergeStyles(className,styles)
 
     if ( typeof children === 'string' ) {
         return <Text style={styles && mergedStyles} { ...rest }>{ children }</Text>;

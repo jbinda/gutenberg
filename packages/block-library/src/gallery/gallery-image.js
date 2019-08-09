@@ -98,6 +98,7 @@ class GalleryImage extends Component {
 				href = link;
 				break;
 		}
+
 		const img = (
 			// Disable reason: Image itself is not meant to be interactive, but should
 			// direct image selection and unfocus caption fields.
@@ -114,12 +115,15 @@ class GalleryImage extends Component {
 				tabIndex="0"
 				aria-label={ ariaLabel }
 				ref={ this.bindContainer }
-				style={{width: 300, height: 300}}
+				style={{width: '100%', height: 300, resizeMode: 'cover'}}
 			/>
 				{ isBlobURL( url ) && <Spinner /> }
 			</>
 			/* eslint-enable jsx-a11y/no-noninteractive-element-interactions */
 		);
+
+		const isWeb = window.localStorage
+		const styles = isWeb ? {} : require('./index.native.scss')
 
 		const className = classnames( {
 			'is-selected': isSelected,
@@ -127,9 +131,9 @@ class GalleryImage extends Component {
 		} );
 
 		return (
-			<Div className={ className }>
+			<Div className={ className } styles={styles}>
 				{ href ? <A href={ href }>{ img }</A> : img }
-				<Div className="block-library-gallery-item__move-menu">
+				<Div className="block-library-gallery-item__move-menu" styles={styles}>
 					<IconButton
 						icon="arrow-left"
 						onClick={ isFirstItem ? undefined : onMoveBackward }
@@ -137,6 +141,7 @@ class GalleryImage extends Component {
 						label={ __( 'Move Image Backward' ) }
 						aria-disabled={ isFirstItem }
 						disabled={ ! isSelected }
+						styles={styles}
 					/>
 					<IconButton
 						icon="arrow-right"
@@ -145,15 +150,17 @@ class GalleryImage extends Component {
 						label={ __( 'Move Image Forward' ) }
 						aria-disabled={ isLastItem }
 						disabled={ ! isSelected }
+						styles={styles}
 					/>
 				</Div>
-				<Div className="block-library-gallery-item__inline-menu">
+				<Div className="block-library-gallery-item__inline-menu" styles={styles}>
 					<IconButton
 						icon="no-alt"
 						onClick={ onRemove }
 						className="blocks-gallery-item__remove"
 						label={ __( 'Remove Image' ) }
 						disabled={ ! isSelected }
+						styles={styles}
 					/>
 				</Div>
 				<RichText

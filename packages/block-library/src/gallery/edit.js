@@ -340,10 +340,10 @@ export default compose( [
 	withSelect( ( select ) => {
 		const { getSettings } = select( 'core/block-editor' );
 		//TODO investigate on getSettings function
-		// const {
-		// 	__experimentalMediaUpload,
-		// } = getSettings();
-
+		const {
+			__experimentalMediaUpload,
+		} = getSettings();
+		// console.log(getSettings, __experimentalMediaUpload)
 		return {
 			mediaUpload: ()=> {},//__experimentalMediaUpload,
 		};

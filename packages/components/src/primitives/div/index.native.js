@@ -2,10 +2,15 @@
  * External dependencies
  */
 import { View as RNView } from 'react-native';
+/**
+ * Internal dependencies
+ */
+import { mergeStyles } from '../utils'
 
-const View = ( { children, className, ...rest } ) => {
+const View = ( { children, className, styles={}, ...rest } ) => {
+	const mergedStyles = mergeStyles(className,styles)
 	return (
-		<RNView style={ className } { ...rest }>
+		<RNView style={styles && mergedStyles} { ...rest }>
 			{ children }
 		</RNView>
 	);
