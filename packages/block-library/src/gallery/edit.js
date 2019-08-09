@@ -254,11 +254,15 @@ class GalleryEdit extends Component {
 			/>
 		);
 
+		const isWeb = window.localStorage
+		const styles = isWeb ? {} : require('./index.native.scss')
+
 		if ( ! hasImages ) {
 			return (
 				<>
 					{ controls }
 					{ mediaPlaceholder }
+					<Span className="box padded" styles={styles}>span</Span>
 				</>
 			);
 		}
@@ -305,12 +309,14 @@ class GalleryEdit extends Component {
 					renderItem={(item,index)=> 	
 					{
 						const img = item
+						const id = img && img.id || index
 						const ariaLabel = sprintf( __( 'image %1$d of %2$d in gallery' ), ( index + 1 ), images.length );
 
 					return <GalleryImage
+						key={ id }
 						url={ img && img.url }
 						alt={ img && img.alt }
-						id={ img && img.id || index}
+						id={ id }
 						isFirstItem={ index === 0 }
 						isLastItem={ ( index + 1 ) === images.length }
 						isSelected={ isSelected && this.state.selectedImage === index }

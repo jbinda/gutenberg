@@ -6,16 +6,20 @@ import { View as RNView } from 'react-native';
  * Internal dependencies
  */
 import { Text } from '../typography';
+import { mergeStyles } from '../utils'
 
-const View = ( { children, className, ...rest } ) => {
-	if ( typeof children === 'string' ) {
-		return <Text { ...rest }>{ children }</Text>;
-	}
-	return (
-		<RNView style={ className } { ...rest }>
-			{ children }
-		</RNView>
-	);
+const View = ( { children, className, styles, ...rest } ) => {
+    // const mergedStyles = className.split(" ").map(style => styles[style])
+    const mergedStyles = mergeStyles(className,styles)
+
+    if ( typeof children === 'string' ) {
+        return <Text style={styles && mergedStyles} { ...rest }>{ children }</Text>;
+    }
+    return (
+        <RNView style={styles && mergedStyles} { ...rest }>
+            { children }
+        </RNView>
+    );
 };
 
 export default View;

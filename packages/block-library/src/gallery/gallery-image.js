@@ -104,6 +104,7 @@ class GalleryImage extends Component {
 			/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 			<>
 			<Image
+				key={ id }
 				src={ url }
 				alt={ alt }
 				data-id={ id }
